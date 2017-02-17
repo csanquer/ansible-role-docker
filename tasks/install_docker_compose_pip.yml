@@ -1,0 +1,16 @@
+---
+- name: remove old docker-compose dependencies
+  pip:
+    executable: "{{ python_2_pip_bin|default('pip') }}"
+    name: "{{ item }}"
+    state: "absent"
+  with_items:
+    - dockerpty
+    - docker-pycreds
+    - docker
+
+- name: install docker compose
+  pip:
+    executable: "{{ python_2_pip_bin|default('pip') }}"
+    name: docker-compose
+    state: "{{ docker_compose_state }}"

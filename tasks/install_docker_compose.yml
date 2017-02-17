@@ -1,18 +1,18 @@
 ---
-- name: install docker compose
-  pip:
-    executable: "{{ python_2_pip_bin|default('pip') }}"
-    name: docker-compose
-    state: "{{ docker_compose_state }}"
+- include: install_docker_compose_bin.yml
+  when: not docker_compose_by_pip
+
+- include: install_docker_compose_pip.yml
+  when: docker_compose_by_pip
 
 - name: get docker compose version
-  shell: "docker-compose --version | awk 'NR==1{print $NF}'"
-  register: docker_compose_result
+  shell: "docker-compose version --short"
+  register: docker_compose_current_result
   ignore_errors: yes
 
 - name: set docker-compose version fact
   set_fact:
-      docker_compose_current_version: "{{ docker_compose_result.stdout|default('') }}"
+      docker_compose_current_version: "{{ docker_compose_current_result.stdout|default('') }}"
   register: docker_compose_version_fact_result
 
 - name: download docker compose bash completion script

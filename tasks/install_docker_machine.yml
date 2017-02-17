@@ -28,7 +28,7 @@
 
 - name: download docker machine
   get_url:
-    url: 'https://github.com/docker/machine/releases/download/v{{ docker_machine_version }}/docker-machine-{{ ansible_system }}-{{ ansible_architecture }}'
+    url: '{{ docker_machine_base_url }}/v{{ docker_machine_version }}/docker-machine-{{ ansible_system }}-{{ ansible_architecture }}'
     dest: /usr/local/bin/docker-machine
     mode: '0755'
     force: yes

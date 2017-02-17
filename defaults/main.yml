@@ -1,7 +1,13 @@
 ---
 docker_state: latest
+# pip install
 docker_compose_state: latest
+# binary install
+docker_compose_version: latest
 docker_machine_version: latest
+
+# install docker-compose by pip (else binary)
+docker_compose_by_pip: false
 
 # main, testing, or experimental
 docker_repo_branch: main

@@ -1,6 +1,11 @@
 ---
-docker_machine_default_version: '0.8.4'
+docker_machine_default_version: '0.9.0'
+docker_compose_default_version: '1.11.1'
 docker_machine_release_api_url: 'https://api.github.com/repos/docker/machine/releases/latest'
+docker_compose_release_api_url: 'https://api.github.com/repos/docker/compose/releases/latest'
+
+docker_compose_base_url: https://github.com/docker/compose/releases/download
+docker_machine_base_url: https://github.com/docker/machine/releases/download
 
 docker_apt_keyserver: "hkp://ha.pool.sks-keyservers.net:80"
 docker_apt_key_id: 58118E89F3A912897C070ADBF76221572C52609D
