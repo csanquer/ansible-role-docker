@@ -31,3 +31,14 @@
       dest: /usr/local/bin/docker-compose
       mode: 0755
   when: docker_compose_current_version != docker_compose_version
+
+- name: remove old pip docker-compose dependencies
+  pip:
+    executable: "{{ python_2_pip_bin|default('pip') }}"
+    name: "{{ item }}"
+    state: "absent"
+  with_items:
+    - dockerpty
+    - docker-pycreds
+    - docker
+    - docker-py
