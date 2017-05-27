@@ -21,3 +21,10 @@ docker_allowed_user: []
 # see https://docs.docker.com/engine/reference/commandline/dockerd/#/daemon-configuration-file
 docker_daemon_config: []
   # dns: ['8.8.8.8', '8.8.4.4']
+
+docker_debian_dependencies:
+  - acl
+  - cgroup-lite
+  - apparmor
+  - "linux-image-extra-{{ ansible_kernel }}"
+  - linux-image-extra-virtual
