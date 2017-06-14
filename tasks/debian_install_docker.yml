@@ -1,4 +1,16 @@
 ---
+- name: ensure overlay kernel module is loaded
+  modprobe:
+    name: overlay
+    state: present
+  when: docker_enable_overlay
+
+- name: enable overlay on boot
+  lineinfile:
+    path: /etc/modules
+    line: 'overlay'
+  when: docker_enable_overlay
+
 - name: add docker repository GPG key
   apt_key:
     keyserver: "{{ docker_apt_keyserver }}"
