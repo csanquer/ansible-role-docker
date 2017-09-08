@@ -26,7 +26,7 @@
     docker_machine_version: "{{ docker_machine_default_version }}"
   when: docker_machine_version == '' or docker_machine_version is none
 
-- name: download docker machine
+- name: "download docker machine {{ docker_machine_version }}"
   get_url:
     url: '{{ docker_machine_base_url }}/v{{ docker_machine_version }}/docker-machine-{{ ansible_system }}-{{ ansible_architecture }}'
     dest: /usr/local/bin/docker-machine

@@ -9,8 +9,8 @@ docker_machine_version: latest
 # install docker-compose by pip (else binary)
 docker_compose_by_pip: false
 
-# main, testing, or experimental
-docker_repo_branch: main
+# edge or test or nothing for stable only
+docker_extra_repo:
 
 # enable Linux kernel overlay module
 docker_enable_overlay: false
@@ -26,6 +26,10 @@ docker_daemon_config: []
   # dns: ['8.8.8.8', '8.8.4.4']
 
 docker_debian_dependencies:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - software-properties-common
   - acl
   - cgroup-lite
   - apparmor

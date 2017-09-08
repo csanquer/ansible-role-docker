@@ -10,7 +10,7 @@
     - docker
     - docker-py
 
-- name: install docker compose
+- name: install docker compose (pip)
   pip:
     executable: "{{ python_2_pip_bin|default('pip') }}"
     name: docker-compose

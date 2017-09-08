@@ -25,11 +25,12 @@
     docker_compose_version: "{{ docker_compose_default_version }}"
   when: docker_compose_version == '' or docker_compose_version is none
 
-- name: download docker compose binary
+- name: "download docker compose binary {{ docker_compose_version }}"
   get_url:
       url: "{{ docker_compose_base_url }}/{{ docker_compose_version }}/docker-compose-Linux-x86_64"
       dest: /usr/local/bin/docker-compose
       mode: 0755
+      force: yes
   when: docker_compose_current_version != docker_compose_version
 
 - name: remove old pip docker-compose dependencies

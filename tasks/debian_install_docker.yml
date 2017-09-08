@@ -13,13 +13,13 @@
 
 - name: add docker repository GPG key
   apt_key:
-    keyserver: "{{ docker_apt_keyserver }}"
-    id: "{{ docker_apt_key_id }}"
+    url: "{{ docker_apt_key_url }}"
+    state: present
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 - name: add docker main repository
   apt_repository:
-    repo: "deb {{ docker_apt_url }} {{ ansible_distribution|lower }}-{{ ('Yakkety' if ansible_distribution_version | version_compare('17.04', '>=') else ansible_distribution_release ) | lower }} {{ docker_repo_branch|default('main') }}"
+    repo: "deb {{ docker_apt_url }} {{ ansible_distribution_release }} stable {{ docker_extra_repo|default('') }}"
     state: present
     filename: "docker_official"
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
@@ -45,5 +45,5 @@
 
 - name: install docker engine
   apt:
-    name: docker-engine
+    name: "{{ docker_apt_package }}"
     state: "{{ docker_state}}"
