@@ -45,5 +45,5 @@
 
 - name: install docker engine
   apt:
-    name: "{{ docker_apt_package }}"
+    name: "{{ docker_apt_package }}{{ ('=' ~ docker_version) if docker_version != '' and docker_version != 'latest' else '' }}"
     state: "{{ docker_state}}"

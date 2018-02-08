@@ -3,6 +3,7 @@ docker_state: latest
 # pip install
 docker_compose_state: latest
 # binary install
+docker_version: latest
 docker_compose_version: latest
 docker_machine_version: latest
 
