@@ -14,5 +14,5 @@
   pip:
     executable: "{{ python_2_pip_bin|default('pip') }}"
     name: docker-compose
-    version: "{{ docker_compose_version|default(omit) }}"
+    version: "{{ docker_compose_version|default(omit) if docker_compose_version != 'latest' and docker_compose_version != '' else omit }}"
     state: "{{ docker_compose_state }}"
