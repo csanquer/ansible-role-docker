@@ -32,7 +32,3 @@ docker_debian_dependencies:
   - curl
   - software-properties-common
   - acl
-  - cgroup-lite
-  - apparmor
-  - "linux-image-extra-{{ ansible_kernel }}"
-  - linux-image-extra-virtual
