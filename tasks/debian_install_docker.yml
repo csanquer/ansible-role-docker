@@ -19,7 +19,7 @@
 
 - name: add docker main repository
   apt_repository:
-    repo: "deb [arch={{ docker_apt_archs[ansible_architecture]|default('amd64') }}] {{ docker_apt_url }} {{ 'artful' if ansible_distribution_version is version('18.04', '>=')  else ansible_distribution_release }} stable {{ docker_extra_repo|default('') }}"
+    repo: "deb [arch={{ docker_apt_archs[ansible_architecture]|default('amd64') }}] {{ docker_apt_url }} {{ 'artful' if ansible_distribution_version is version('18.04', '>')  else ansible_distribution_release }} stable {{ docker_extra_repo|default('') }}"
     state: present
     filename: "docker_official"
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
