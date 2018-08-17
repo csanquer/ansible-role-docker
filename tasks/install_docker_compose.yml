@@ -20,4 +20,5 @@
     url: 'https://raw.githubusercontent.com/docker/compose/{{ docker_compose_current_version }}/contrib/completion/bash/docker-compose'
     dest: /etc/bash_completion.d/docker-compose
     mode: 0644
+  ignore_errors: yes
   when: docker_compose_current_version is defined and docker_compose_current_version != ''

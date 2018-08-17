@@ -39,6 +39,7 @@
     url: "https://raw.githubusercontent.com/docker/machine/v{{ docker_machine_version }}/contrib/completion/bash/{{ item }}.bash"
     dest: "/etc/bash_completion.d/{{ item }}"
     mode: '0644'
+  ignore_errors: yes
   with_items:
     - docker-machine
     - docker-machine-prompt
