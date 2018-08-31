@@ -5,6 +5,12 @@
 - include: install_docker_compose_pip.yml
   when: docker_compose_by_pip
 
+# docker login bug
+- name: remove golang-docker-credential-helpers
+  apt:
+    name: golang-docker-credential-helpers
+    state: absent
+
 - name: get docker compose version
   shell: "docker-compose version --short"
   register: docker_compose_current_result
