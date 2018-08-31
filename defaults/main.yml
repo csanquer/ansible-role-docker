@@ -17,7 +17,15 @@ docker_extra_repo:
 docker_enable_overlay: false
 
 docker_registry_auth: []
-# -{ user: '', password: '', email: '' , owner: ''}
+  # -
+  #   # docker registry username
+  #   user: ''
+  #   # docker registry password
+  #   password: ''
+  #   # unix user that run docker
+  #   owner:
+  #   # docker registry url
+  #   host:
 
 docker_allowed_user: []
 

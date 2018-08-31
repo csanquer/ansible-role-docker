@@ -12,7 +12,7 @@
     - restart docker
 
 - name: log into docker registry private servers
-  command: docker login --username={{ item.user }} --password={{ item.password }} --email={{ item.email|default('') }} {{ item.host|default('') }}
+  command: docker login --username={{ item.user }} --password={{ item.password }} {{ item.host|default('') }}
   become: true
   become_user: "{{ item.owner }}"
   with_items: "{{ docker_registry_auth }}"
