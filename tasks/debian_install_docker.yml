@@ -39,9 +39,8 @@
 
 - name: install docker dependencies
   apt:
-    name: "{{ item }}"
+    name: "{{ docker_debian_dependencies }}"
     state: present
-  with_items: "{{ docker_debian_dependencies }}"
 
 - name: install docker engine
   apt:
