@@ -1,6 +1,6 @@
 ---
-docker_machine_default_version: '0.12.2'
-docker_compose_default_version: '1.16.1'
+docker_machine_default_version: '0.16.0'
+docker_compose_default_version: '1.23.2'
 docker_machine_release_api_url: 'https://api.github.com/repos/docker/machine/releases/latest'
 docker_compose_release_api_url: 'https://api.github.com/repos/docker/compose/releases/latest'
 
