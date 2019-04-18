@@ -10,6 +10,7 @@
   - docker-compose
 
 - include: install_docker_machine.yml
+  when: docker_machine_install
   tags:
   - docker
   - docker-machine
