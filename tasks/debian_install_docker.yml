@@ -3,13 +3,13 @@
   modprobe:
     name: overlay
     state: present
-  when: docker_enable_overlay
+  when: docker_enable_overlay|bool
 
 - name: enable overlay on boot
   lineinfile:
     path: /etc/modules
     line: 'overlay'
-  when: docker_enable_overlay
+  when: docker_enable_overlay|bool
 
 - name: add docker repository GPG key
   apt_key:
@@ -35,7 +35,7 @@
 - name: apt update list for new docker repository
   apt:
     update_cache: yes
-  when: docker_apt_result.changed
+  when: docker_apt_result.changed|bool
 
 - name: install docker dependencies
   apt:

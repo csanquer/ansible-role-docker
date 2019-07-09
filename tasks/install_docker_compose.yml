@@ -1,9 +1,9 @@
 ---
 - include: install_docker_compose_bin.yml
-  when: not docker_compose_by_pip
+  when: not docker_compose_by_pip|bool
 
 - include: install_docker_compose_pip.yml
-  when: docker_compose_by_pip
+  when: docker_compose_by_pip|bool
 
 # docker login bug
 - name: remove golang-docker-credential-helpers
