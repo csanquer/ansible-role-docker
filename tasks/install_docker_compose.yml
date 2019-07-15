@@ -1,9 +1,9 @@
 ---
 - include: install_docker_compose_bin.yml
-  when: not docker_compose_by_pip|bool
+  when: not docker_compose_by_pip | bool
 
 - include: install_docker_compose_pip.yml
-  when: docker_compose_by_pip|bool
+  when: docker_compose_by_pip | bool
 
 # docker login bug
 - name: remove golang-docker-credential-helpers
@@ -11,14 +11,14 @@
     name: golang-docker-credential-helpers
     state: absent
 
-- name: get docker compose version
-  shell: "docker-compose version --short"
+- name: get docker compose version # noqa 301
+  command: "docker-compose version --short"
   register: docker_compose_current_result
   ignore_errors: yes
 
 - name: set docker-compose version fact
   set_fact:
-      docker_compose_current_version: "{{ docker_compose_current_result.stdout|default('') }}"
+      docker_compose_current_version: "{{ docker_compose_current_result.stdout | default('') }}"
   register: docker_compose_version_fact_result
 
 - name: download docker compose bash completion script
@@ -27,4 +27,4 @@
     dest: /etc/bash_completion.d/docker-compose
     mode: 0644
   ignore_errors: yes
-  when: docker_compose_current_version is defined and docker_compose_current_version != ''
+  when: docker_compose_current_version is defined and docker_compose_current_version

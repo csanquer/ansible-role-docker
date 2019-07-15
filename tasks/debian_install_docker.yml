@@ -3,13 +3,13 @@
   modprobe:
     name: overlay
     state: present
-  when: docker_enable_overlay|bool
+  when: docker_enable_overlay | bool
 
 - name: enable overlay on boot
   lineinfile:
     path: /etc/modules
     line: 'overlay'
-  when: docker_enable_overlay|bool
+  when: docker_enable_overlay | bool
 
 - name: add docker repository GPG key
   apt_key:
@@ -19,7 +19,7 @@
 
 - name: add docker main repository
   apt_repository:
-    repo: "deb [arch={{ docker_apt_archs[ansible_architecture]|default('amd64') }}] {{ docker_apt_url }} {{ 'artful' if ansible_distribution_version is version('18.04', '>')  else ansible_distribution_release }} stable {{ docker_extra_repo|default('') }}"
+    repo: "deb [arch={{ docker_apt_archs[ansible_architecture]|default('amd64') }}] {{ docker_apt_url }} {{ 'artful' if ansible_distribution_version is version('18.04', '>')  else ansible_distribution_release }} stable {{ docker_extra_repo | default('') }}"
     state: present
     filename: "docker_official"
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
@@ -32,10 +32,10 @@
     group: root
     mode: 'u=rw,g=r,o=r'
 
-- name: apt update list for new docker repository
+- name: apt update list for new docker repository # noqa 503
   apt:
     update_cache: yes
-  when: docker_apt_result.changed|bool
+  when: docker_apt_result.changed | bool
 
 - name: install docker dependencies
   apt:
@@ -44,5 +44,5 @@
 
 - name: install docker engine
   apt:
-    name: "{{ docker_apt_package }}{{ ('=' ~ docker_version) if docker_version != '' and docker_version != 'latest' else '' }}"
-    state: "{{ 'present' if docker_version != '' and docker_version != 'latest' and docker_state == 'latest' else docker_state }}"
+    name: "{{ docker_apt_package }}{{ ('=' ~ docker_version) if docker_version and docker_version != 'latest' else '' }}"
+    state: "{{ 'present' if docker_version and docker_version != 'latest' and docker_state == 'latest' else docker_state }}"

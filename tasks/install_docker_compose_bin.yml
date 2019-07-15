@@ -1,12 +1,12 @@
 ---
-- name: get docker compose version
-  shell: "docker-compose version --short"
+- name: get docker compose version # noqa 301
+  command: "docker-compose version --short"
   register: docker_compose_result
   ignore_errors: yes
 
 - name: set docker compose current version fact
   set_fact:
-      docker_compose_current_version: "{{ docker_compose_result.stdout|default('') }}"
+      docker_compose_current_version: "{{ docker_compose_result.stdout | default('') }}"
 
 - name: get latest stable docker compose tag
   uri:
@@ -17,13 +17,13 @@
 
 - name: set docker compose version fact
   set_fact:
-       docker_compose_version: "{{ docker_compose_github_result.json.name|default(docker_compose_default_version)|replace('v','') }}"
+       docker_compose_version: "{{ docker_compose_github_result.json.name | default(docker_compose_default_version)|replace('v','') }}"
   when: docker_compose_version == 'latest'
 
 - name: set docker compose version fact
   set_fact:
     docker_compose_version: "{{ docker_compose_default_version }}"
-  when: docker_compose_version == '' or docker_compose_version is none
+  when: not docker_compose_version
 
 - name: "download docker compose binary {{ docker_compose_version }}"
   get_url:
@@ -35,7 +35,7 @@
 
 - name: remove old pip docker-compose dependencies
   pip:
-    executable: "{{ python_2_pip_bin|default('pip') }}"
+    executable: "{{ python_2_pip_bin | default('pip') }}"
     name:
       - dockerpty
       - docker-pycreds

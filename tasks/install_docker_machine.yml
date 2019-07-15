@@ -1,12 +1,12 @@
 ---
-- name: get docker machine version
+- name: get docker machine version # noqa 301
   shell: "docker-machine --version | cut -d ' ' -f 3 | cut -d ',' -f 1"
   register: docker_machine_result
   ignore_errors: yes
 
 - name: set docker machine current version fact
   set_fact:
-      docker_machine_current_version: "{{ docker_machine_result.stdout|default('') }}"
+      docker_machine_current_version: "{{ docker_machine_result.stdout | default('') }}"
   register: docker_machine_version_fact_result
 
 - name: get latest stable docker-machine tag
@@ -18,13 +18,13 @@
 
 - name: set docker machine latest version fact
   set_fact:
-    docker_machine_version: "{{ docker_machine_github_result.json.tag_name|default(docker_machine_default_version)|replace('v','') }}"
+    docker_machine_version: "{{ docker_machine_github_result.json.tag_name | default(docker_machine_default_version)|replace('v','') }}"
   when: docker_machine_version == 'latest'
 
 - name: set docker machine version fact
   set_fact:
     docker_machine_version: "{{ docker_machine_default_version }}"
-  when: docker_machine_version == '' or docker_machine_version is none
+  when: not docker_machine_version
 
 - name: "download docker machine {{ docker_machine_version }}"
   get_url:

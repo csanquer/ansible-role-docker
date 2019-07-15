@@ -11,7 +11,7 @@
   notify:
     - restart docker
 
-- name: log into docker registry private servers
+- name: log into docker registry private servers # noqa 301
   command: docker login --username={{ item.user }} --password={{ item.password }} {{ item.host|default('') }}
   become: true
   become_user: "{{ item.owner }}"

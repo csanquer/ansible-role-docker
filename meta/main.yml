@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: Charles Sanquer
-  description:
+  description: installe and configure docker, docker-compose, docker-machine
   min_ansible_version: 2.4
   license: LGPLv3
   github_branch: master
