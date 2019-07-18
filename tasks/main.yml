@@ -18,3 +18,4 @@
 - include: config.yml
   tags:
   - docker
+  - docker-config
