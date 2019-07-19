@@ -16,28 +16,13 @@
     name: "{{ item }}"
     append: yes
     groups: docker
-  with_items: "{{ docker_allowed_user }}"
+  loop: "{{ docker_allowed_user }}"
 
-- name: create login password files directories
-  file:
-    path:  "{{ item.password_file_path | dirname }}"
-    owner: "{{ item.owner }}"
-    mode: 'u=rwX,go=rX'
-    state: directory
-  when: item.password_file_path is defined and item.password_file_path
-  with_items: "{{ docker_registry_auth }}"
-
-- name: create login password files
-  copy:
-    content: "{{ item.password_file_content }}"
-    dest: "{{ item.password_file_path }}"
-    owner: "{{ item.owner }}"
-    mode: 'u=rw,go='
-  when: item.password_file_content is defined and item.password_file_path is defined and item.password_file_content and item.password_file_path
-  with_items: "{{ docker_registry_auth }}"
-
-- name: log into docker registry private servers # noqa 301 305
-  shell: "docker login --username \"{{ item.user }}\" --password \"{{ ('$(cat ' ~ item.password_file_path ~ ')') if item.password_file_path else item.password }}\" {{ item.host | default('') }}"
+- name: log into docker registry private servers
+  docker_login:
+    registry_url: "{{ item.host | default(omit) }}"
+    username: "{{ item.user }}"
+    password: "{{ item.password }}"
   become: true
   become_user: "{{ item.owner }}"
-  with_items: "{{ docker_registry_auth }}"
+  loop: "{{ docker_registry_auth }}"
