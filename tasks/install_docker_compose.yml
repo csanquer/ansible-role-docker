@@ -1,9 +1,26 @@
 ---
+- name: remove old pip docker-compose dependencies
+  pip:
+    executable: "{{ docker_python_pip_bin | default('pip3') }}"
+    name:
+      - dockerpty
+      - docker-pycreds
+      - docker
+      - docker-py
+    state: "absent"
+
 - include: install_docker_compose_bin.yml
   when: not docker_compose_by_pip | bool
 
 - include: install_docker_compose_pip.yml
   when: docker_compose_by_pip | bool
+
+- name: ensure pip docker dependencies are installed
+  pip:
+    executable: "{{ docker_python_pip_bin | default('pip3') }}"
+    name:
+      - docker
+    state: "present"
 
 # docker login bug
 - name: remove golang-docker-credential-helpers

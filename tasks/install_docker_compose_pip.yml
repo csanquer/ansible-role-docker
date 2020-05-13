@@ -1,17 +1,7 @@
 ---
-- name: remove old pip docker-compose dependencies
-  pip:
-    executable: "{{ python_2_pip_bin | default('pip') }}"
-    name:
-      - dockerpty
-      - docker-pycreds
-      - docker
-      - docker-py
-    state: "absent"
-
 - name: install docker compose (pip)
   pip:
-    executable: "{{ python_2_pip_bin | default('pip') }}"
+    executable: "{{ docker_python_pip_bin | default('pip3') }}"
     name: docker-compose
     version: "{{ docker_compose_version | default(omit) if docker_compose_version != 'latest' and docker_compose_version else omit }}"
     state: "{{ docker_compose_state }}"

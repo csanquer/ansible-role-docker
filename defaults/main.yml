@@ -12,6 +12,7 @@ docker_machine_install: true
 
 # install docker-compose by pip (else binary)
 docker_compose_by_pip: false
+docker_python_pip_bin: pip3
 
 # edge or test or nothing for stable only
 docker_extra_repo:
