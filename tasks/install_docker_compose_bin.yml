@@ -35,7 +35,7 @@
 
 - name: remove old pip docker-compose dependencies
   pip:
-    executable: "{{ python_2_pip_bin | default('pip') }}"
+    executable: "{{ docker_python_pip_bin | default('pip') }}"
     name:
       - dockerpty
       - docker-pycreds
