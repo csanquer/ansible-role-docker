@@ -1,0 +1,18 @@
+---
+- name: "download docker machine (gitlab version)"
+  get_url:
+    url: "{{ docker_machine_gitlab_base_url }}"
+    dest: /usr/local/bin/docker-machine
+    mode: 'u=rwx,g=rx,o=rx'
+    force: yes
+
+- name: download docker machine bash completion script
+  get_url:
+    url: "https://gitlab.com/gitlab-org/ci-cd/docker-machine/-/raw/master/contrib/completion/bash/{{ item }}.bash"
+    dest: "/etc/bash_completion.d/{{ item }}"
+    mode: '0644'
+  ignore_errors: yes
+  with_items:
+    - docker-machine
+    - docker-machine-prompt
+    - docker-machine-wrapper

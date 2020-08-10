@@ -7,6 +7,8 @@ docker_compose_release_api_url: 'https://api.github.com/repos/docker/compose/rel
 docker_compose_base_url: https://github.com/docker/compose/releases/download
 docker_machine_base_url: https://github.com/docker/machine/releases/download
 
+docker_machine_gitlab_base_url: https://gitlab-docker-machine-downloads.s3.amazonaws.com/master/docker-machine
+
 docker_apt_package: docker-ce
 docker_apt_key_url: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
 docker_apt_url: "https://download.docker.com/linux/{{ ansible_distribution | lower }}"

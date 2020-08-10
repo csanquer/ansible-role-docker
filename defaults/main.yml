@@ -9,6 +9,8 @@ docker_machine_version: latest
 
 # install docker-machine
 docker_machine_install: true
+# install gitlab fork of docker machine
+docker_machine_gitlab: false
 
 # install docker-compose by pip (else binary)
 docker_compose_by_pip: false

@@ -10,7 +10,13 @@
   - docker-compose
 
 - include: install_docker_machine.yml
-  when: docker_machine_install|bool
+  when: docker_machine_install|bool and not docker_machine_gitlab|bool
+  tags:
+  - docker
+  - docker-machine
+
+- include: install_docker_machine_gitlab.yml
+  when: docker_machine_install|bool and docker_machine_gitlab|bool
   tags:
   - docker
   - docker-machine
