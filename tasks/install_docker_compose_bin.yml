@@ -17,7 +17,7 @@
 
 - name: set docker compose version fact
   set_fact:
-       docker_compose_version: "{{ docker_compose_github_result.json.name | default(docker_compose_default_version)|replace('v','') }}"
+       docker_compose_version: "{{ docker_compose_github_result.json.name | default(docker_compose_default_version) }}"
   when: docker_compose_version == 'latest'
 
 - name: set docker compose version fact
