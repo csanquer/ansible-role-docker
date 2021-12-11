@@ -27,7 +27,7 @@
 
 - name: "download docker compose binary {{ docker_compose_version }}"
   get_url:
-      url: "{{ docker_compose_base_url }}/{{ docker_compose_version }}/docker-compose-Linux-x86_64"
+      url: "{{ docker_compose_base_url }}/v{{ docker_compose_version }}/docker-compose-Linux-x86_64"
       dest: /usr/local/bin/docker-compose
       mode: 0755
       force: yes
